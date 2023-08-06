@@ -48,6 +48,7 @@ def btn_select_session_click(session_name):
 def btn_submit_click(img1, img2, img3, img4, img5, img6, img7, img8, img9, img10):
     img_list = []
     qr_list = []
+    output = ""
     for img in [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]:
         if img is not None:
             img_list.append(img)
@@ -59,8 +60,20 @@ def btn_submit_click(img1, img2, img3, img4, img5, img6, img7, img8, img9, img10
     for qr in qr_list:
         if qr == None:
             qr_list.remove(qr)
-    return qr_list
+        else:
+            print(util_json.check_item(session, qr))
 
+    item_dict = util_json.get_not_done_loc_dict(session)
+
+    for key in item_dict.keys():
+        output += f"\n\n\n-----{key}-----\n"
+        # print(f"\n\n-----{key}-----")
+        for item in item_dict[key]:
+            item_id = item["資產編號"]
+            item_name = item["中文名稱"]
+            output += f"{item_id} {item_name}\n"
+    print(output)
+    return output
 
 
 with gr.Blocks() as demo:

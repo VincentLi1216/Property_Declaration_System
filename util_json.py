@@ -31,8 +31,8 @@ def create_session(session_name, csv, path="./sessions"):
 
     os.chdir(cwd)
 
-def check_item(session_name, item_id, path="./sessions"):
-    session_path = f"{path}/{session_name}.json"
+def check_item(session_path, item_id, path="./sessions"):
+    # session_path = f"{path}/{session_name}.json"
     with open(session_path, "r") as f:
         data = json.load(f)
     
@@ -50,8 +50,8 @@ def check_item(session_name, item_id, path="./sessions"):
 
     return "done"
 
-def get_not_done(session_name, path="./sessions", location_filter=None):
-    session_path = f"{path}/{session_name}.json"
+
+def get_not_done_loc_dict(session_path):
     with open(session_path, "r") as f:
         data = json.load(f)
     
@@ -61,25 +61,37 @@ def get_not_done(session_name, path="./sessions", location_filter=None):
     df = pd.read_csv(csv_path)
 
     output_list = []
+    locations = []
+    nan_appended = False
+    loc_dict = {}
 
     for not_checked_id in not_checked:
-        # 讀取 CSV 文件
+        
 
         # 選取某一 column 的值等於特定值的 row
         selected_row = df.loc[df['資產編號'] == not_checked_id]
-        
 
         # 將該 row 的所有資料以 dict 的形式返回
         row_dict = selected_row.to_dict(orient='records')[0]
+        item_loc = row_dict["位置描述"] 
+        # print(row_dict["位置描述"])
 
-        if location_filter == None or row_dict["位置描述"] == location_filter:
-            output_list.append(row_dict)
-            print(row_dict)
+        if item_loc not in locations:
+            if str(item_loc) == "nan":
+                if not nan_appended:
+                    locations.append("無位置描述")
+                    loc_dict["無位置描述"] = [row_dict]
+                    nan_appended = True
+                else:
+                    loc_dict["無位置描述"].append(row_dict)
+            else:
+                locations.append(item_loc)
+                loc_dict[item_loc] = [row_dict]
+
         else:
-            continue
+            loc_dict[item_loc].append(row_dict)
 
-    return output_list
-
+    return loc_dict
 
 
 
@@ -89,6 +101,7 @@ def get_not_done(session_name, path="./sessions", location_filter=None):
 if __name__ == "__main__":
     # create_session(csv="./csvs/Newcsv.csv", session_name="my_session")
     # print(check_item("my_session","C010602131"))
-    print(get_not_done("my_session", location_filter="庫房(中)"))
+    # print(get_not_done("my_session", location_filter="庫房(中)"))
+    get_not_done_loc_dict("./sessions/Iphone1.json")
     
 
