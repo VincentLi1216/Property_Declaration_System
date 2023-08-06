@@ -38,12 +38,22 @@ with gr.Blocks() as demo:
     with gr.Row():
         with gr.Column():
             with gr.Column():
-                new_session_name = gr.Textbox(label="New PD session")
+                new_session_name = gr.Textbox(label="Create new session")
                 new_session_csv = gr.Dropdown(choices=csvs, label = "Import csv from")
                 selected_session = gr.Dropdown(sessions, label = "Choose your session", interactive=True)
                 with gr.Row():
-                    btn_new_session = gr.Button(value="Create New session")
-                    btn_select_session = gr.Button(value="Select session")
+                    btn_new_session = gr.Button(value="Create")
+                    btn_select_session = gr.Button(value="Select")
+                img1 = gr.Image(label="QR code #1")
+                img2 = gr.Image(label="QR code #2")
+                img3 = gr.Image(label="QR code #3")
+                img4 = gr.Image(label="QR code #4")
+                img5 = gr.Image(label="QR code #5")
+                img6 = gr.Image(label="QR code #6")
+                img7 = gr.Image(label="QR code #7")
+                img8 = gr.Image(label="QR code #8")
+                img9 = gr.Image(label="QR code #9")
+                img10 = gr.Image(label="QR code #10")
         with gr.Column():
             output = gr.Textbox(label="output")
 
@@ -53,5 +63,5 @@ with gr.Blocks() as demo:
 
 if __name__ == "__main__":
 
-    demo.launch(debug=True)
+    demo.launch(debug=True, share = True)
     # print(get_choices("./csvs", ".csv"))
