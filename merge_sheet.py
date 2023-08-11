@@ -37,8 +37,8 @@ def merge_csv_files(a_csv_path, b_csv_path, output_csv_path, pk):
 
 with gr.Blocks() as demo:
     gr.Markdown("# CSV Merge System")
-    csvA = gr.Dropdown(csvs, label="csv-A")
-    csvB = gr.Dropdown(csvs, label="csv-B")
+    csvA = gr.Dropdown(csvs, label="csv-A (你的csv)")
+    csvB = gr.Dropdown(csvs, label="csv-B (總務的csv)")
     new_file_name = gr.Textbox(label="New File Name")
     btn_merge = gr.Button(value="Merge csv")
     btn_merge.click(btn_merge_click,inputs=[csvA, csvB, new_file_name])
