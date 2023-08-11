@@ -1,5 +1,15 @@
+import gradio as gr
 import pandas as pd
 import os
+import pds_gradio as pds
+
+csvs = pds.get_choices("csvs", ".csv")
+
+def btn_merge_click(csvA, csvB, file_name):
+    save_path = os.path.join("./csv", file_name)
+    print(save_path)
+    merge_csv_files(csvA, csvB, os.path.join("./csvs", file_name), pk="資產編號")
+
 
 def merge_csv_files(a_csv_path, b_csv_path, output_csv_path, pk):
     
@@ -23,11 +33,22 @@ def merge_csv_files(a_csv_path, b_csv_path, output_csv_path, pk):
     # 寫入新的CSV檔
     merged_df.to_csv(output_csv_path, index=False)
     print(f"合併已完成")
-    print(f"合併檔在在\"{output_path}\"")
+    # print(f"合併檔在在\"{output_path}\"")
+
+with gr.Blocks() as demo:
+    gr.Markdown("# CSV Merge System")
+    csvA = gr.Dropdown(csvs, label="csv-A")
+    csvB = gr.Dropdown(csvs, label="csv-B")
+    new_file_name = gr.Textbox(label="New File Name")
+    btn_merge = gr.Button(value="Merge csv")
+    btn_merge.click(btn_merge_click,inputs=[csvA, csvB, new_file_name])
+
 
 if __name__ == "__main__":
-    a_path = input("請輸入你的.csv檔案位置：")
-    b_path = input("請輸入新的.csv檔案位置：")
-    output_path = input("請輸入新的檔案名稱：")
-    merge_csv_files(a_path, b_path, output_path, "資產編號")
+    # a_path = input("請輸入你的.csv檔案位置：")
+    # b_path = input("請輸入新的.csv檔案位置：")
+    # output_path = input("請輸入新的檔案名稱：")
+    # merge_csv_files(a_path, b_path, output_path, "資產編號")
+    demo.launch(debug=True, share = True)
+    
 
