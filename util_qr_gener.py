@@ -128,8 +128,7 @@ def create_qr_stickers4location(session, location, x_num, y_num):
     i = 0
 
     for page_index in range(page_num):
-        output_imgs.append(np.copy(blank_img))
-        img = output_imgs[page_index]
+        img = np.copy(blank_img)
         for row in range(y_num):
             for column in range(x_num):
                 if i >= item_num:
@@ -140,7 +139,8 @@ def create_qr_stickers4location(session, location, x_num, y_num):
         page_title = f"Page: {page_index+1}/{page_num}"
         img = add_text(img, location, 10, 10, 100)
         img = add_text(img, page_title, 10, 130, 50)
-        show_img(img)
+        output_imgs.append(img)
+        # show_img(img)
     
     return output_imgs
 
@@ -160,8 +160,10 @@ if __name__ == "__main__":
     place = "無位置描述"
     session = "./sessions/Iphone1.json"
     # place = "VTR"
-    # create_qr_stickers4location("./sessions/Iphone1.json", place, 5, 15)
-    create_qr_stickers4session(session, 5, 15)
+    img1, img2 = create_qr_stickers4location("./sessions/Iphone1.json", place, 5, 15)
+    show_img(img1)
+    show_img(img2)
+    # create_qr_stickers4session(session, 5, 15)
 
 
 
