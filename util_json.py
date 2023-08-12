@@ -1,6 +1,7 @@
 import os
 import json
 import pandas as pd
+import math
 
 # 假設你有一個字典 data
 
@@ -74,7 +75,7 @@ def get_not_done_loc_dict(session_path):
         # 將該 row 的所有資料以 dict 的形式返回
         row_dict = selected_row.to_dict(orient='records')[0]
         item_loc = row_dict["位置描述"] 
-        # print(row_dict["位置描述"])
+        print(row_dict["位置描述"])
 
         if item_loc not in locations:
             if str(item_loc) == "nan":
@@ -93,6 +94,19 @@ def get_not_done_loc_dict(session_path):
 
     return loc_dict
 
+def get_all_locs(session):
+    df = pd.read_csv(session)
+    # print(df.columns)
+    location_descriptions = df['位置描述'].tolist()
+    location_descriptions = list(set(location_descriptions))
+
+    for i in range(len(location_descriptions)):
+        if str(location_descriptions[i]) == "nan":
+            location_descriptions[i] = "無位置描述"
+
+
+    return location_descriptions
+
 
 
 
@@ -102,6 +116,7 @@ if __name__ == "__main__":
     # create_session(csv="./csvs/Newcsv.csv", session_name="my_session")
     # print(check_item("my_session","C010602131"))
     # print(get_not_done("my_session", location_filter="庫房(中)"))
-    get_not_done_loc_dict("./sessions/Iphone1.json")
+    # get_not_done_loc_dict("./sessions/Iphone1.json")
+    get_all_locs("./csvs/HIHI.csv")
     
 

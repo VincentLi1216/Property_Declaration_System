@@ -95,6 +95,7 @@ def btn_submit_click(img1, img2, img3, img4, img5, img6, img7, img8, img9, img10
             item_id = item["資產編號"]
             item_name = item["中文名稱"]
             output += f"{item_id} {item_name}\n"
+    print(item_dict)
     print(output)
     return output
 
