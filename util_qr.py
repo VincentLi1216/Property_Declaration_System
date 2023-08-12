@@ -1,8 +1,9 @@
 from PIL import Image
-from pyzbar.pyzbar import decode
+# from pyzbar.pyzbar import decode
 import qrcode
 import cv2
 import os
+import numpy as np
 
 def read_qr_code(img, is_img=True):
     # # 使用Pillow來讀取圖片
