@@ -1,5 +1,5 @@
 from PIL import Image
-# from pyzbar.pyzbar import decode
+from pyzbar.pyzbar import decode
 import qrcode
 import cv2
 import os
