@@ -146,9 +146,17 @@ def create_qr_stickers4location(session, location, x_num, y_num):
 
 def create_qr_stickers4session(session, x_num, y_num):
     loc_list = util_json.get_not_done_loc_dict(session)
-
-    for location in loc_list:
-        create_qr_stickers4location(session, location, x_num, y_num)
+    output_imgs = []
+    loc_dict = {}
+    index = 0
+    for i,location in enumerate(loc_list):
+        for img in create_qr_stickers4location(session, location, x_num, y_num):
+            output_imgs.append(img)
+            loc_dict[i] = location
+            index += 1
+            # show_img(img)
+    return output_imgs, loc_dict
+    
 
 
 if __name__ == "__main__":
@@ -160,10 +168,10 @@ if __name__ == "__main__":
     place = "無位置描述"
     session = "./sessions/Iphone1.json"
     # place = "VTR"
-    img1, img2 = create_qr_stickers4location("./sessions/Iphone1.json", place, 5, 15)
-    show_img(img1)
-    show_img(img2)
-    # create_qr_stickers4session(session, 5, 15)
+    # img1, img2 = create_qr_stickers4location("./sessions/Iphone1.json", place, 5, 15)
+    # show_img(img1)
+    # show_img(img2)
+    create_qr_stickers4session(session, 5, 15)
 
 
 

@@ -36,7 +36,7 @@ def merge_csv_files(a_csv_path, b_csv_path, output_csv_path, pk):
     # print(f"合併檔在在\"{output_path}\"")
 
 with gr.Blocks() as demo:
-    gr.Markdown("# CSV Merge System")
+    gr.Markdown("# CSV Merge System\n ### github: https://github.com/VincentLi1216/Property_Declaration_System")
     csvA = gr.Dropdown(csvs, label="csv-A (你的csv)")
     csvB = gr.Dropdown(csvs, label="csv-B (總務的csv)")
     new_file_name = gr.Textbox(label="New File Name")
