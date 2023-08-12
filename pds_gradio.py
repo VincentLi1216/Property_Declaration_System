@@ -2,7 +2,7 @@ import gradio as gr
 import os
 import util_json, util_qr, util_zip
 import json
-from pyzbar.pyzbar import decode
+# from pyzbar.pyzbar import decode
 from PIL import Image
 
 
