@@ -93,8 +93,9 @@ def btn_submit_click(img1, img2, img3, img4, img5, img6, img7, img8, img9, img10
         for item in item_dict[key]:
             num_not_done += 1
     output += f"未盤點清單\n{session}\n待盤點數量:{num_not_done}\n"
+    keys = sorted(item_dict.keys())
     
-    for key in item_dict.keys():
+    for key in keys:
         output += f"\n\n\n-----{key}-----\n"
         # print(f"\n\n-----{key}-----")
         for item in item_dict[key]:

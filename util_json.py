@@ -103,6 +103,8 @@ def get_all_locs(session):
     for i in range(len(location_descriptions)):
         if str(location_descriptions[i]) == "nan":
             location_descriptions[i] = "無位置描述"
+    print(location_descriptions)
+    location_descriptions = sorted(location_descriptions)
 
 
     return location_descriptions
