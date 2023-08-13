@@ -51,26 +51,26 @@ def dp_session_change(session):
 with gr.Blocks() as demo:
     gr.Markdown("# QR Code Generator\n ### github: https://github.com/VincentLi1216/Property_Declaration_System")
     with gr.Tab("Session"):
-        dp_session = gr.Dropdown(sessions)
+        dp_session = gr.Dropdown(sessions, label = "Choose Session")
         with gr.Row():
             x_num_session = gr.Textbox(label="Number of Column")
             y_num_session = gr.Textbox(label="Number of Row")
-        tb_name_session = gr.Textbox(label="Enter the Folder Name")
+        tb_name_session = gr.Textbox(label="Enter Folder Name")
         btn_session = gr.Button(value="Generate QR Code")
         output_session = gr.Textbox(label="Completion")
     with gr.Tab("Location"):
-        dp_session_loc = gr.Dropdown(sessions)
-        dp_loc_loc = gr.Dropdown(interactive=True)
+        dp_session_loc = gr.Dropdown(sessions, label="Choose Session")
+        dp_loc_loc = gr.Dropdown(interactive=True,label="Choose Location")
         with gr.Row():
             x_num = gr.Textbox(label="Number of Column")
             y_num = gr.Textbox(label="Number of Row")
-        tb_name_loc = gr.Textbox(label="Enter the Folder Name")
+        tb_name_loc = gr.Textbox(label="Enter Folder Name")
         btn_loc = gr.Button(value="Generate QR Code")
         output_loc = gr.Textbox(label="Completion")
     with gr.Tab("Individual"):
         tb_item_name_indiv = gr.Textbox(label="Enter Item's Name")
         tb_item_id_indiv = gr.Textbox(label="Enter Item's ID")
-        tb_name_indiv = gr.Textbox(label="Enter the Folder Name")
+        tb_name_indiv = gr.Textbox(label="Enter Folder Name")
         btn_indiv = gr.Button(value="Generate QR Code")
 
         output_indiv = gr.Image()

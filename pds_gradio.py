@@ -37,8 +37,9 @@ checked = None
 def btn_new_session_click(session_name, csv):
     global sessions, csvs
     util_json.create_session(session_name, csv)
-    sessions.append(f"sessions/{session_name}.json")
-    return gr.Dropdown.update(choices=sessions)
+    sessions = get_choices("sessions", ".json")
+    return gr.Dropdown.update(choices=sessions), gr.Dropdown.update(choices=sessions)
+
 
 def btn_select_session_click(session_name):
     global session, num_item, checked
@@ -87,7 +88,12 @@ def btn_submit_click(img1, img2, img3, img4, img5, img6, img7, img8, img9, img10
             print(util_json.check_item(session, qr))
 
     item_dict = util_json.get_not_done_loc_dict(session)
-
+    num_not_done = 0
+    for key in item_dict.keys():
+        for item in item_dict[key]:
+            num_not_done += 1
+    output += f"未盤點清單\n{session}\n待盤點數量:{num_not_done}\n"
+    
     for key in item_dict.keys():
         output += f"\n\n\n-----{key}-----\n"
         # print(f"\n\n-----{key}-----")
@@ -136,7 +142,7 @@ with gr.Blocks() as demo:
             output = gr.Textbox(label="output", interactive=True).style(show_copy_button=True)
 
 
-    btn_new_session.click(btn_new_session_click, inputs=[new_session_name, new_session_csv], outputs=selected_session)
+    btn_new_session.click(btn_new_session_click, inputs=[new_session_name, new_session_csv], outputs=[selected_session, create_selected_session])
     btn_select_session.click(btn_select_session_click, inputs=selected_session, outputs=session_textbox)
     btn_create_select_session.click(btn_select_session_click, inputs=create_selected_session, outputs=create_session_textbox)
     btn_submit.click(btn_submit_click, inputs=[img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, upload_folder],outputs=output)
