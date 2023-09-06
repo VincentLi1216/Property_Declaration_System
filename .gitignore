@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__
+sessions
+upload_img
+qr_cache
+csvs
