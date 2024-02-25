@@ -17,7 +17,7 @@ filelock==3.12.2
 fonttools==4.42.0
 frozenlist==1.4.0
 fsspec==2023.6.0
-gradio==3.39.0
+gradio==4.19.2
 gradio_client==0.3.0
 h11==0.14.0
 httpcore==0.17.3
